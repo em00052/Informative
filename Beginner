@@ -1,0 +1,21 @@
+y<-c(1,3,5,6,7,9)
+#makes a vector
+constant<-c(1,1,1,1,1,1)
+#makes a vector
+x<-c(0,1,1,2,3,5)
+#makes a vector
+Y<-matrix (y)
+#creates matrix from a vector
+X<-as.matrix(cbind(constant,x))
+#creates a matrix more flexibly:cbind binds column together
+XT<-t(X)
+#transposes a matrix
+XTX<-XT%*%X
+#matrix multiplication
+XTXINV<-solve (XTX)
+#inverts matrix
+beta<-XTXINV%*%XT%*%Y
+#solve for regression coefficients
+dataset<-as_tibble(cbind(y,X))
+#created a dataset from existing matrices
+regression<-lm(V1~x,data=dataset)
